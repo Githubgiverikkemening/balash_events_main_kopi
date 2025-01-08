@@ -1,0 +1,206 @@
+---
+
+const {data} = Astro.props;
+// @ts-nocheck
+---
+<article>
+    <img src=`/img/${data.img}` alt={data.place}>
+    <header>
+        <div class="header_text">
+        <h3>{data.place}</h3>
+        <p>{data.date}</p>
+        </div>
+        <button class="hover_button">
+            <span class="hover_text">LÆS MERE</span>
+        </button>
+       <div class="hover_info"> <h2 class="overskrift">{data.overskrift}</h2>
+        <p>{data.hover}</p></div>
+    </header>
+</article>
+<style>
+    body {
+    background-color: #fcfcfc;
+    }
+    article {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    }
+    img {
+    width: 100%;
+    display: block;
+    }
+    header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    }
+    .header_text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    }
+    .hover_button {
+    display: none; 
+    width: 100%;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: black;
+    color: white;
+    border: none;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    pointer-events: auto;
+    }
+    .hover_info {
+    display: none; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ECEDEF;
+    color: black;
+    padding: 5px;
+    justify-content: top;
+    text-align: left;
+    z-index: 1;
+    pointer-events: none;
+    flex-direction: column;
+    }
+
+    .hover_info p{
+font-size: 7px;
+
+    }
+    .hover_info .overskrift{
+font-size: 12px;
+    }
+
+    @media (min-width: 800px) {
+    article:hover .hover_info {
+    display: flex; 
+    border-radius: 0;
+    pointer-events: auto;
+}
+    .hover-button {
+    display: none; 
+    }
+    .hover_info {
+    display: none;
+    pointer-events: none; 
+    }
+    .hover_info p{
+font-size: 16px;
+    }
+    .hover_info .overskrift{
+font-size: 24px;
+    }
+    h3 {
+    font-family: "Roboto Mono", monospace;
+    font-style: normal;
+    font-size: 20px;
+    }
+    p {
+    font-family: "Roboto Mono", monospace;
+    font-style: normal;
+    font-size: 12px;
+    }
+    .overskrift{
+    color: black;
+    text-align: center;
+    z-index: 1; 
+    margin-bottom: 10px;
+}
+    .hover_info {
+    display: none; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ECEDEF;
+    color: black;
+    align-items: center;
+    padding: 5px;
+    border-radius: 0;
+    position: absolute;
+    font-size: 12px;
+    justify-content: center;
+    text-align: center;
+    z-index: 1;
+    flex-direction: column;
+    }
+    
+    }
+    @media (min-width: 501px) and (max-width: 799px) { 
+    .hover_button {
+    display: block; 
+    }
+    .hover_info p{
+    font-size: 12px;
+    }
+    .hover_info .overskrift{
+    font-size: 18px;
+    }
+    h3 {
+    font-family: "Roboto Mono", monospace;
+    font-style: normal;
+    font-size: 17px;
+    }
+    p {
+    font-family: "Roboto Mono", monospace;
+    font-style: normal;
+    font-size: 11px;
+    } 
+    .hover_info {
+        display: none;
+    }
+    }
+    @media (max-width: 500px) {
+    .hover_button {
+    display: block; 
+    }
+    h3 {
+    font-family: "Roboto Mono", monospace;
+    font-style: normal;
+    font-size: 15px;
+    }
+    p {
+    font-family: "Roboto Mono", monospace;
+    font-style: normal;
+    font-size: 9px;
+    } 
+    .hover_info {
+    display: none;
+    }
+    }
+</style>
+<script>
+
+document.querySelectorAll("article").forEach((article) => {
+    const hoverInfo = article.querySelector(".hover_info")! as HTMLElement;
+    const hoverButton = article.querySelector(".hover_button")!;
+    const hoverText = hoverButton.querySelector(".hover_text");
+
+    hoverButton.addEventListener("click", () => {
+        const hoverText = hoverButton.querySelector(".hover_text");
+        if (!hoverText) {
+            return;
+        }
+        hoverInfo.classList.toggle("open"); 
+
+        if (hoverInfo.classList.contains("open")) {
+            hoverInfo.style.display = "flex";   
+            hoverText.textContent = "LUK"; 
+        } else {
+            hoverInfo.style.display = "none"; 
+            hoverText.textContent = "LÆS MERE"; 
+        }
+    });
+    
+});
+</script>

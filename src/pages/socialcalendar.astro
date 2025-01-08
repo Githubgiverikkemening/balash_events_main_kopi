@@ -1,0 +1,67 @@
+---
+// @ts-nocheck
+import MainLayout from '../layouts/Mainlayout.astro';
+import EventCard from '../components/EventCard.astro';
+const data = await fetch("https://skyynjazjdyqpnjbrbgh.supabase.co/rest/v1/socialcalendar", {
+    method: "GET",
+    headers: {
+        apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNreXluamF6amR5cXBuamJyYmdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM3MzI2MDgsImV4cCI6MjA0OTMwODYwOH0.Xp8pMWZc50qLfkL7cMZ5HSKnxF52xnYhKdtQzCV1WzU"
+    }
+}).then(res=>res.json());
+---
+<MainLayout>
+    <section class="container">
+    <h1>Tidligere events</h1>
+    <section>
+        <ul>
+        {data.map((data) => {
+            return <EventCard data={data} />;
+        })
+    }
+        </ul>
+        <p> Tilmeld dig vores nyhedsbrev <a class="link" href="./components/Newsletterbox"> her</a> og vær first in line når vi sender nyt om næste spændende pop-up fra Balash.</p>
+    </section>
+</section>
+</MainLayout>
+<style>
+ul {
+display: grid;
+gap: 1rem;
+}
+p {
+padding-top: 3rem;
+}
+
+a {
+color: black;
+cursor: pointer;
+font: 700;
+}
+@media (max-width: 799px) {
+.container {
+margin: 13%;
+margin-top: 0;
+margin-bottom: 13%;
+}
+
+ul {
+grid-template-columns: repeat(2, 1fr);
+}
+
+}
+ @media (min-width: 800px) {
+.container {
+margin: 7%;
+margin-top: 0;
+margin-bottom: 7;
+}
+
+ul {
+grid-template-columns: repeat(3, 1fr);
+}
+}
+
+
+</style>
+
+
