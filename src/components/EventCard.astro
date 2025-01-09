@@ -66,19 +66,23 @@ const {data} = Astro.props;
     background-color: #ECEDEF;
     color: black;
     padding: 5px;
-    justify-content: top;
+    justify-content: flex-start;
     text-align: left;
     z-index: 1;
     pointer-events: none;
     flex-direction: column;
     }
+    .hover_info.open{
+        display: flex;
+        pointer-events: auto;
+    }
 
     .hover_info p{
-font-size: 7px;
+font-size: 10px;
 
     }
     .hover_info .overskrift{
-font-size: 12px;
+font-size: 13px;
     }
 
     @media (min-width: 800px) {
@@ -92,13 +96,32 @@ font-size: 12px;
     }
     .hover_info {
     display: none;
-    pointer-events: none; 
+    pointer-events: none;
+
+    display: none; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    color: black;
+    align-items: left;
+    padding: 10px;
+    border-radius: 0;
+    position: absolute;
+
+    justify-content: left;
+    text-align: left;
+    z-index: 1;
+    flex-direction: column;
     }
+
     .hover_info p{
-font-size: 16px;
+font-size: 17px;
     }
     .hover_info .overskrift{
-font-size: 24px;
+font-size: 20px;
+text-align: left;
     }
     h3 {
     font-family: "Roboto Mono", monospace;
@@ -114,38 +137,41 @@ font-size: 24px;
     color: black;
     text-align: center;
     z-index: 1; 
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
+    
+    }
+
+
+    @media (min-width: 501px) and (max-width: 799px) { 
+    .hover_button {
+    display: block; 
+    }
+
     .hover_info {
     display: none; 
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: #ECEDEF;
     color: black;
-    align-items: center;
-    padding: 5px;
-    border-radius: 0;
-    position: absolute;
-    font-size: 12px;
-    justify-content: center;
-    text-align: center;
+    padding: 7px;
+    justify-content: top;
+    text-align: left;
     z-index: 1;
+    pointer-events: none;
     flex-direction: column;
-    }
-    
-    }
-    @media (min-width: 501px) and (max-width: 799px) { 
-    .hover_button {
-    display: block; 
     }
     .hover_info p{
     font-size: 12px;
     }
     .hover_info .overskrift{
-    font-size: 18px;
+    font-size: 16px;
     }
+
+
     h3 {
     font-family: "Roboto Mono", monospace;
     font-style: normal;
@@ -159,7 +185,10 @@ font-size: 24px;
     .hover_info {
         display: none;
     }
-    }
+
+
+
+}
     @media (max-width: 500px) {
     .hover_button {
     display: block; 
@@ -200,6 +229,8 @@ document.querySelectorAll("article").forEach((article) => {
             hoverInfo.style.display = "none"; 
             hoverText.textContent = "LÆS MERE"; 
         }
+   
+   
     });
     
 });
